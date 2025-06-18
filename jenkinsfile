@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    tools {
+        maven 'Mavens9.10'
+        jdk 'java21'
+    }
+    stages {
+        stage('build') {
+            steps {
+                echo "rahul"
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/RahulMaiti/Assignment2']])
+                bat "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+        }
+    }    
+  
+}
